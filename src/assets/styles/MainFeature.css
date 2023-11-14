@@ -4,15 +4,14 @@
 
 .feature-cover {
   width: 100%;
-  height: 700px;
+  height: 100dvh;
   object-fit: cover;
 }
 
 .feature-description-container {
   position: absolute;
-  top: 50%;
+  top: 120px;
   left: 0;
-  transform: translateY(-50%);
   color: white;
   padding-left: 100px;
 }

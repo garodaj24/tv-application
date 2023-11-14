@@ -1,0 +1,12 @@
+.trending-container {
+  margin-top: -250px;
+  margin-left: 100px;
+  position: relative;
+  padding-right: 2rem;
+}
+
+.trending-title {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 0;
+}

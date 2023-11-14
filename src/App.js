@@ -1,11 +1,15 @@
-import './App.css';
-import Menu from './components/Menu';
+import Menu from './components/Menu'
+import Body from './components/Body'
 
-function App() {
+import { MovieProvider } from './contexts/MovieContext'
+
+const App = () => {
   return (
     <div>
-      App
       <Menu />
+      <MovieProvider>
+        <Body />
+      </MovieProvider>
     </div>
   );
 }

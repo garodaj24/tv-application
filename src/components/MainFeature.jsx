@@ -1,25 +1,43 @@
-import React from 'react'
+import { useMovie } from '../contexts/MovieContext'
+
 import Button from './Button'
 
 import '../assets/styles/MainFeature.css'
 
-const MainFeature = ({ feature }) => {
+const MainFeature = () => {
+  const { featuredMovie } = useMovie()
+
+  const secondsToHoursAndMinutes = (seconds) => {
+    if (isNaN(seconds) || seconds < 0) return '';
+  
+    const hours = Math.floor(seconds / 3600);
+    const remainingSeconds = seconds % 3600;
+    const minutes = Math.floor(remainingSeconds / 60);
+  
+    const hoursText = hours > 0 ? `${hours}h` : '';
+    const minutesText = minutes > 0 ? `${minutes}m` : '';
+  
+    return `${hoursText} ${minutesText}`;
+  }
+
+  if (!featuredMovie) return null
+
   return (
     <section className='main-feature'>
       <img
-        src={feature.coverImage}
+        src={require(`../assets/images/${featuredMovie.CoverImage}`)}
         alt="main featured"
         className='feature-cover'
       />
       <div className='feature-description-container'>
-        <h2 className='feature-type'>{feature.type}</h2>
-        <img src={feature.titleImage} />
+        <h2 className='feature-type'>{featuredMovie.Category}</h2>
+        <img src={require(`../assets/images/${featuredMovie.TitleImage}`)} />
         <div className='feature-details'>
-          <span>{feature.year}</span>
-          <span>{feature.restriction}</span>
-          <span>{feature.duration}</span>
+          <span>{featuredMovie.ReleaseYear}</span>
+          <span>{featuredMovie.MpaRating}</span>
+          <span>{secondsToHoursAndMinutes(featuredMovie.Duration)}</span>
         </div>
-        <p className='feature-description'>{feature.description}</p>
+        <p className='feature-description'>{featuredMovie.Description}</p>
         <div className='feature-buttons'>
           <Button backgroundColor={'white'}>
             <span className='btn-play-text'>&#9654; Play</span>

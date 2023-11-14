@@ -9,9 +9,9 @@
 		"MpaRating": "18+",
 		"Category": "Movie",
 		"Duration": "6000",
-		"Description": "Info About it"
+		"Description": "A bank teller called Guy realizes he is a background character in an open world video game called Free City that will soon go offline"
 	},
-	"TendingNow": [
+	"TrendingNow": [
 		{
 			"Id": "1",
 			"Title": "Title 1",

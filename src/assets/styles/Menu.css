@@ -1,0 +1,47 @@
+.menu-container {
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0);
+  width: 100px;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  transition: all .5s ease;
+  z-index: 2;
+}
+
+.menu-container:hover {
+  width: 300px;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.profile-container {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  width: 250px;
+  visibility: hidden;
+}
+
+.menu-container:hover .profile-container {
+  visibility: visible;
+}
+
+.initial-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.secondary-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}

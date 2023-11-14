@@ -1,3 +1,4 @@
+import { useState, useEffect, useRef } from 'react'
 import { useMovie } from '../contexts/MovieContext'
 
 import Button from './Button'
@@ -6,6 +7,16 @@ import '../assets/styles/MainFeature.css'
 
 const MainFeature = () => {
   const { featuredMovie } = useMovie()
+  const videoRef = useRef(null)
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false)
+
+  useEffect(() => {
+    if (featuredMovie?.VideoUrl) {
+      setTimeout(() => {
+        setIsVideoPlaying(true)
+      }, 2000);
+    }
+  }, [featuredMovie])
 
   const secondsToHoursAndMinutes = (seconds) => {
     if (isNaN(seconds) || seconds < 0) return '';
@@ -24,11 +35,23 @@ const MainFeature = () => {
 
   return (
     <section className='main-feature'>
-      <img
-        src={require(`../assets/images/${featuredMovie.CoverImage}`)}
-        alt="main featured"
-        className='feature-cover'
-      />
+      {
+        isVideoPlaying ?
+        <video
+          ref={videoRef}
+          className='feature-cover'
+          autoPlay
+          onEnded={() => setIsVideoPlaying(false)}
+        >
+          <source src={featuredMovie.VideoUrl} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video> : 
+        <img
+          src={require(`../assets/images/${featuredMovie.CoverImage}`)}
+          alt="main featured"
+          className='feature-cover'
+        />
+      }
       <div className='feature-description-container'>
         <h2 className='feature-type'>{featuredMovie.Category}</h2>
         <img src={require(`../assets/images/${featuredMovie.TitleImage}`)} />

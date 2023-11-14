@@ -1,13 +1,15 @@
-import React from 'react'
+import { useMovie } from '../contexts/MovieContext'
 import Carousel from './Carousel'
 
 import '../assets/styles/Trending.css'
 
 const Trending = () => {
+  const { movies } = useMovie()
+  
   return (
     <section className='trending-container'>
       <h2 className='trending-title'>Trending Now</h2>
-      <Carousel images={[1, 2, 3]} />
+      <Carousel items={movies} />
     </section>
   )
 }

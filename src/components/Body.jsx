@@ -4,19 +4,6 @@ import { useMovie } from '../contexts/MovieContext'
 import MainFeature from './MainFeature'
 import Trending from './Trending'
 
-import coverImage from '../assets/images/FeaturedCoverImage.png'
-import titleImage from '../assets/images/FeaturedTitleImage.png'
-
-const feature = {
-  coverImage: coverImage,
-  titleImage: titleImage,
-  type: 'MOVIE',
-  year: 2021,
-  restriction: '18+',
-  duration: '1h 48m',
-  description: 'A bank teller called Guy realizes he is a background character in an open world video game called Free City that will soon go offline.',
-}
-
 const Body = () => {
   const { setMovies, setFeaturedMovie } = useMovie();
   
@@ -32,10 +19,24 @@ const Body = () => {
         // Take the top 50 movies
         const top50Movies = sortedMovies.slice(0, 50);
 
-        console.log(data.Featured, 'featured');
+        const lastMovieId = sessionStorage.getItem('lastMovie');
+        if (lastMovieId) {
+          const index = top50Movies.findIndex((movie) => movie.Id === lastMovieId);
 
+          // If the movie is found, move it to the first position
+          if (index !== -1) {
+            const updatedMovies = [
+              top50Movies[index],
+              ...top50Movies.slice(0, index),
+              ...top50Movies.slice(index + 1),
+            ];
+
+            setMovies(updatedMovies);
+          }
+        } else {
+          setMovies(top50Movies);
+        }
         setFeaturedMovie(data.Featured)
-        setMovies(top50Movies);
       } catch (error) {
         console.error('Error fetching movies:', error);
       }

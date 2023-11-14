@@ -1,11 +1,10 @@
 import { useState, useRef } from 'react';
 import { useMovie } from '../contexts/MovieContext';
+
 import '../assets/styles/Carousel.css';
 
-const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-const Carousel = () => {
-  const { movies } = useMovie();
+const Carousel = ({ items }) => {
+  const { setFeaturedMovie } = useMovie();
 
   const [dragging, setDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -29,6 +28,11 @@ const Carousel = () => {
     carouselRef.current.scrollLeft = scrollLeft - walk;
   };
 
+  const handleItemClick = (item) => {
+    sessionStorage.setItem('lastMovie', item.Id);
+    setFeaturedMovie(item);
+  }
+
   return (
     <div
       ref={carouselRef}
@@ -38,13 +42,15 @@ const Carousel = () => {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseUp}
     >
-      {movies.map(item => (
+      {items.map(item => (
         <img
           key={item.Id}
-          src={`https://picsum.photos/200/300?random=${item.Id}`}
+          src={require(`../assets/images/${item.CoverImage}`)}
           alt='carousel item'
+          className='carousel-item'
           width={200}
           height={300}
+          onClick={() => handleItemClick(item)}
         />
       ))}
     </div>
